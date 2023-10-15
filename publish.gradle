@@ -1,0 +1,15 @@
+ext {
+    PUBLISH_GROUP_ID = 'io.github.hydrawisk793'
+    PUBLISH_ARTIFACT_ID = 'kaphein-java-ulid'
+    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_DESCRIPTION = 'An implementation of ULID.'
+    PUBLISH_URL = 'https://github.com/Hydrawisk793/kaphein-java-ulid'
+    PUBLISH_LICENSE_NAME = 'MIT License'
+    PUBLISH_LICENSE_URL = 'https://github.com/Hydrawisk793/kaphein-java-ulid/blob/master/LICENSE'
+    PUBLISH_DEVELOPER_ID = 'hyw793'
+    PUBLISH_DEVELOPER_NAME = 'Hydron Carter'
+    PUBLISH_DEVELOPER_EMAIL = 'hyw793@gmail.com'
+    PUBLISH_SCM_CONNECTION = 'scm:git:github.com/Hydrawisk793/kaphein-java-ulid.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com/Hydrawisk793/kaphein-java-ulid.git'
+    PUBLISH_SCM_URL = 'https://github.com/Hydrawisk793/kaphein-java-ulid'
+}
