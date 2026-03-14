@@ -1,7 +1,7 @@
 ext {
     PUBLISH_GROUP_ID = 'io.github.hydrawisk793'
     PUBLISH_ARTIFACT_ID = 'kaphein-java-ulid'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.0.1'
     PUBLISH_DESCRIPTION = 'An implementation of ULID.'
     PUBLISH_URL = 'https://github.com/Hydrawisk793/kaphein-java-ulid'
     PUBLISH_LICENSE_NAME = 'MIT License'
