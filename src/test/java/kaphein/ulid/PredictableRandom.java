@@ -1,6 +1,8 @@
 package kaphein.ulid;
 
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 class PredictableRandom extends Random
 {
@@ -17,7 +19,8 @@ class PredictableRandom extends Random
   @Override
   public long nextLong()
   {
-    synchronized(thisLock)
+    thisLock.lock();
+    try
     {
       long result;
 
@@ -34,11 +37,15 @@ class PredictableRandom extends Random
 
       return result;
     }
+    finally
+    {
+      thisLock.unlock();
+    }
   }
 
   private static final long serialVersionUID = 3718340320917784630L;
 
-  private final Object thisLock = new Object();
+  private final Lock thisLock = new ReentrantLock();
 
   private volatile long randomnessMsBits;
 

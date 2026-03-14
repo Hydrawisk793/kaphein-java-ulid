@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <p>
@@ -42,7 +44,7 @@ public class MonotonicUlidGenerator extends AbstractUlidGenerator
   {
     super(epochMilliSupplier, rng);
 
-    thisLock = new Object();
+    thisLock = new ReentrantLock();
     lastTimestamp = 0L;
     lastRandomnessMsv = 0L;
     lastRandomnessLsv = 0L;
@@ -169,7 +171,8 @@ public class MonotonicUlidGenerator extends AbstractUlidGenerator
     {
       boolean shouldGenerate = true;
 
-      synchronized(thisLock)
+      thisLock.lock();
+      try
       {
         boolean initializingRandomness = true;
 
@@ -237,6 +240,10 @@ public class MonotonicUlidGenerator extends AbstractUlidGenerator
         lastRandomnessMsv = maxRandomness[0];
         lastRandomnessLsv = maxRandomness[1];
       }
+      finally
+      {
+        thisLock.unlock();
+      }
 
       while(shouldGenerate && count > 0)
       {
@@ -253,7 +260,7 @@ public class MonotonicUlidGenerator extends AbstractUlidGenerator
     }
   }
 
-  private final Object thisLock;
+  private final Lock thisLock;
 
   private volatile long lastTimestamp;
 

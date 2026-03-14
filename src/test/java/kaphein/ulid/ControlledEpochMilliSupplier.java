@@ -1,5 +1,8 @@
 package kaphein.ulid;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 class ControlledEpochMilliSupplier implements EpochMilliSupplier
 {
   public ControlledEpochMilliSupplier(long initialEpochMilli, int delay)
@@ -17,7 +20,8 @@ class ControlledEpochMilliSupplier implements EpochMilliSupplier
   @Override
   public long get()
   {
-    synchronized(thisLock)
+    thisLock.lock();
+    try
     {
       final long result = epochMilli;
 
@@ -30,9 +34,13 @@ class ControlledEpochMilliSupplier implements EpochMilliSupplier
 
       return result;
     }
+    finally
+    {
+      thisLock.unlock();
+    }
   }
 
-  private final Object thisLock = new Object();
+  private final Lock thisLock = new ReentrantLock();
 
   private final int delay;
 
